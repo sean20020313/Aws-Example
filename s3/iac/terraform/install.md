@@ -23,5 +23,9 @@ sudo apt update
 
 sudo apt-get install terraform
 ```
-
+```
 terraform init
+terraform plan
+terraform apply
+terraform destory
+```
