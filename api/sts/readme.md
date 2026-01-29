@@ -76,3 +76,6 @@ aws iam delete-access-key --access-key-id AKIAUGO4KIQTVKDZJ6KV \
 ```sh
 aws iam delete-user --user-name sts-machine-user
 ```
+
+
+## tset
