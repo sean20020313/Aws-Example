@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Launch a simple EC2 for use with testing VPCs"
+
+Parameters:
+  InstanceType: 
+    Type: String
+    Default: t2.micro
+  VpcId: 
+    Type: String
+    Default: vpc-0534fbc1dae0cb378
+  ImageId: 
+    Type: String
+    Default: ami-020ce4ade5046b3ed
+  SubnetId: 
+    Type: String
+    Default: subnet-0d2bb91733b4356b9
+
+Resources:  
+  MyEC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  MyEC2InstanceProfile: 
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref MyEC2Role
+
+  MyEC2Instance: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      IamInstanceProfile: !Ref MyEC2InstanceProfile
+      InstanceType: !Ref InstanceType
+      ImageId: !Ref ImageId
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds:
+        - !GetAtt SG.GroupId
+
+  SG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow all traffic (testing only)
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  InstanceId:
+    Description: EC2 Instance ID
+    Value: !Ref MyEC2Instance
+  PublicIP:
+    Description: Public IP of EC2
+    Value: !GetAtt MyEC2Instance.PublicIp
