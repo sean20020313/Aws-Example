@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Example IAM User with managed and inline policies
+
+Resources:
+  MyUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: 'my-cool-user'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/job-function/ViewOnlyAccess'
+      Policies:
+        - PolicyName: 'my-cool-policy'
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: 'IamListAccess'
+                Effect: Allow
+                Action: 
+                  - 'iam:ListRoles'
+                  - 'iam:ListUsers'
+                Resource: '*'
+
+  MyinlinePolicy:
+    Type: AWS::IAM::UserPolicy
+    Properties:
+      PolicyName: 'my-inline-policy-user'
+      UserName: !Ref MyUser
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'ec2:*'
+            Resource: '*'
+
+  MysecondInlinePolicy:
+    Type: AWS::IAM::UserPolicy
+    Properties:
+      PolicyName: 'my-second-inline-policy-user'
+      UserName: !Ref MyUser
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 's3:*'
+            Resource: '*'
