@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "Deploying CloudFormation stack for Auto Scaling Group example"
+
+aws cloudformation deploy \
+--template-file template.yaml \
+--stack-name my-asg-fun-stack \
+--region ca-central-1 \

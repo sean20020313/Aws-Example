@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: EC2 in Default VPC with Default Security Group
+
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      #ca-central-1
+      ImageId: ami-066ab5c7bf87a3e58  
+      Tags:
+        - Key: Name
+          Value: EC2DefaultAll
