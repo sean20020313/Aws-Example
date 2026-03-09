@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo "== send"
+aws sqs send-message \
+  --queue-url https://sqs.us-east-1.amazonaws.com/288761725991/MySQSQueue \
+  --message-body "Hello, SQS!" \
+  --region us-east-1 \
+  --delay-seconds 0 \
+  --message-attributes file://message-attributes.json
