@@ -1,0 +1,8 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A simple AWS CloudFormation template for creating an SNS topic.
+Resources:
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    
+
+
