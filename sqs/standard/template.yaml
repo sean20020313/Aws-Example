@@ -1,0 +1,8 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A simple AWS CloudFormation template for creating an SQS queue.
+Resources:
+  SQSQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: MySQSQueue
+      #FifoQueue: false

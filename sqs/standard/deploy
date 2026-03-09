@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "== deploy sqs"
+
+STACK_NAME="sqs-queue"
+
+aws cloudformation deploy \
+  --template-file template.yaml \
+  --stack-name $STACK_NAME \
+  --region us-east-1 \
+  --capabilities CAPABILITY_IAM
