@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo "== receive"
+aws sqs receive-message \
+  --queue-url https://sqs.us-east-1.amazonaws.com/288761725991/MySQSQueue \
+  --region us-east-1 \
+    --max-number-of-messages 1 \    
+    --attribute-names All \
+    --message-attribute-names All \
+    --visibility-timeout 30 \
+    --wait-time-seconds 0   
