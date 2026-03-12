@@ -1,6 +1,17 @@
 require 'bunny'
 
-connection = Bunny.new
+config = {
+    host: '/',
+    username: 'admin',
+    password: '000000',
+    virtual_host: 'myapp.production',
+    port: 5672,
+    ssl: false
+}
+
+b = Bunny.new("amqp://guest:guest@localhost:5672")
+
+connection = Bunny.new(*config)
 connection.start
 channel = connection.create_channel
 queue = channel.queue("hello")
