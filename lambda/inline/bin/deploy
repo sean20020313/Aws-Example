@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+
+
+# we need the absolute path because relative path was giving us trouble
+root_path="$(realpath .)"
+#config_path="${root_path}/python.toml"
+
+
+
+# sam deploy
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-deploying.html
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-deploy.html
+
+echo "== SAM Deploy =="
+#echo "Loading configuration: $config_path"
+
+sam deploy \
+  --template-file "/Users/zhangboxiang/Desktop/aws/Aws-Example/lambda/inline/.aws-sam/build/template.yaml" \
+  --stack-name "inline-lambda-py" \
+  --capabilities "CAPABILITY_IAM"

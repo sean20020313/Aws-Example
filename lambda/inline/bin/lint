@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+root_path=$(realpath .)
+
+echo "-- SAM validate --"
+
+cfn-lint "${root_path}/template.yaml"
